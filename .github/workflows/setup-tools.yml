@@ -21,7 +21,7 @@ jobs:
 
     - name: Run commands over SSH
       run: |
-        ssh -i /ruta/a/tu/llave.pem ubuntu@<direccion_ip_instancia> '
+        ssh -i /ruta/a/tu/llave.pem ubuntu@172.31.25.156 '
           chmod +x /00_ec2/ec2_user_data.sh &&
           /00_ec2/ec2_user_data.sh
         '
