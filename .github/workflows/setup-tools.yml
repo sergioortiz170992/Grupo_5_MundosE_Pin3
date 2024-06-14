@@ -23,7 +23,7 @@ jobs:
         echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
         echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
-    - name: Run setup-tools.sh
+    - name: Run ec2_user_data.sh
       run: |
-        chmod +x ./setup-tools.sh
-        ./setup-tools.sh
+        chmod +x ./00_ec2/ec2_user_data.sh
+        ./ec2_user_data.sh
