@@ -16,10 +16,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Upload ec2_user_data.sh to AWS instance
-      run: |
-        scp -o StrictHostKeyChecking=no -i /ruta/a/tu/llave.pem /ruta/al/archivo/ec2_user_data.sh ubuntu@<direccion_ip_instancia>:/00_ec2/ec2_user_data.sh
+    - name: Install SSH client
+      run: sudo apt-get update && sudo apt-get install -y openssh-client
 
-    - name: Run ec2_user_data.sh in AWS instance
+    - name: Run commands over SSH
       run: |
-        ssh -o StrictHostKeyChecking=no -i /ruta/a/tu/llave.pem ubuntu@<direccion_ip_instancia> 'chmod +x /00_ec2/ec2_user_data.sh && /00_ec2/ec2_user_data.sh'
+        ssh -i /ruta/a/tu/llave.pem ubuntu@<direccion_ip_instancia> '
+          chmod +x /00_ec2/ec2_user_data.sh &&
+          /00_ec2/ec2_user_data.sh
+        '
