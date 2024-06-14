@@ -16,14 +16,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup AWS credentials
+    - name: Upload ec2_user_data.sh to AWS instance
       run: |
-        mkdir -p ~/.aws
-        echo "[default]" > ~/.aws/credentials
-        echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY }}" >> ~/.aws/credentials
-        echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+        scp -o StrictHostKeyChecking=no -i /ruta/a/tu/llave.pem /ruta/al/archivo/ec2_user_data.sh ubuntu@<direccion_ip_instancia>:/00_ec2/ec2_user_data.sh
 
-    - name: Run ec2_user_data.sh
+    - name: Run ec2_user_data.sh in AWS instance
       run: |
-        chmod +x ./00_ec2/ec2_user_data.sh
-        ./00_ec2/ec2_user_data.sh
+        ssh -o StrictHostKeyChecking=no -i /ruta/a/tu/llave.pem ubuntu@<direccion_ip_instancia> 'chmod +x /00_ec2/ec2_user_data.sh && /00_ec2/ec2_user_data.sh'
