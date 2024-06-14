@@ -1,0 +1,22 @@
+name: Setup Tools
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run setup-tools.sh
+      run: |
+        chmod +x ./setup-tools.sh
+        ./setup-tools.sh
