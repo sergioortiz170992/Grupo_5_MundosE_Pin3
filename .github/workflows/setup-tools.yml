@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to AWS (Optional)
-        uses: aws-actions/aws-ssh@v3
+        uses: actions/ssh@v3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
