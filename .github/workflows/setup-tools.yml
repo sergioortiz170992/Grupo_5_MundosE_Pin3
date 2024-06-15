@@ -13,8 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Add build steps here (e.g., npm install, tests, Docker build)
-
   deploy:  # Added optional deployment job
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +21,8 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          run: |
-            - chmod +x /00_ec2/ec2_user_data.sh
-            - /00_ec2/ec2_user_data.sh
+          key: ${{ secrets.EC2_SSH_KEY }}  # Encrypted private key
+      - name: Run deployment script
+        run: |
+          chmod +x /00_ec2/ec2_user_data.sh
+          /00_ec2/ec2_user_data.sh
